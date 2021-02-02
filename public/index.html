@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width initial-scale=1.0" />
+    <title>Peloton Visualization</title>
+    <link rel="stylesheet" href="/public/style.css" />
+    <script defer src="bundle.js"></script>
+    <script src="https://d3js.org/d3.v6.min.js"></script>
+  </head>
+
+  <body>
+    <div id="title-div">
+      <h1 id="main-title"><em>LATINYODA</em>'S PELOTON VISUAL PERFORMANCE</h1>
+    </div>
+
+    <div id="banner-div">
+      <img src="/public/images/banner.jpg" id="banner-img">
+    </div>
+
+    <!-- div for basic barchart - #1 -->
+    <div id="basic_barchart">
+        <!-- //Basic Histogram: show with which instructor Pam has the highest output
+     // set the dimensions of the graph -->
+    <svg width="960" height="650" id="svg1"></svg>
+    <h3 id="graph1-title">Output/Minute by Instructor (Cycling, in KWatts)</h3>
+    </div>
+
+    <!-- div to aggregate output by month - #2  -->
+    <div id="output_per_month" id="svg2">
+      <svg width="960" height="650"></svg>
+      <h3 id="graph2-title">Output/Month</h3>
+    </div>
+
+  </body>
+</html>

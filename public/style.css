@@ -1,0 +1,72 @@
+body {
+  margin: 0px;
+  padding: 0px;
+  box-sizing: border-box;
+  overflow: auto;
+  font-family: arial, sans-serif;
+  background-color: rgb(25, 26, 29);
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+}
+#title-div {
+  margin-top: 10px;
+}
+
+#main-title {
+  background-color: rgb(25, 26, 29);
+  color: rgb(251, 51, 71);
+  font-family: 'Roboto', sans-serif;
+  font-size: 32px;
+  flex-direction: row;
+  margin-top: 0;
+  margin-bottom: 5px;
+  width: 100vw;
+  text-align: center;
+  position: static;
+}
+
+#banner-div {
+  justify-content: center;
+  width: 100vw;
+  height: 384.3px;
+  margin-top: 5px;
+  position: relative;
+}
+
+#banner-img {
+  width: 100vw;
+  height: 100%;
+}
+
+/* FIRST GRAPH */
+#basic_barchart {
+  color: rgb(194, 193, 193);
+  width: 960px;
+  margin-top: 10px;
+}
+
+rect {
+  fill: steelblue;
+}
+
+text {
+  font-size: 1.4em;
+}
+
+#graph1-title {
+  color: rgb(251, 51, 71);
+  margin-left: 30%;
+}
+
+/* SECOND GRAPH */
+#output_per_month {
+  color: rgb(194, 193, 193);
+  width: 960px;
+  margin-top: 10px;
+}
+
+#graph2-title {
+  color: rgb(251, 51, 71);
+  margin-left: 30%;
+}
