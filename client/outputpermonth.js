@@ -1,74 +1,74 @@
-import {d3} from 'd3'
+import {
+  select,
+  csv,
+  scaleLinear,
+  max,
+  scaleBand,
+  axisLeft,
+  axisBottom
+} from "d3" 
 
-// set the dimensions and margins of the graph
-const margin2 = {top: 50, right: 20, bottom: 50, left: 50},
-  width2 = 460 - margin2.left - margin2.right,
-  height2 = 400 - margin2.top - margin2.bottom
+//First graph
+const svg2 = select('svg')
 
-// append the svg object to the body of the page
-const svg2 = d3
-  .select('/data/output_per_month.csv')
-  .append('svg')
-  .attr('width', width2 + margin2.left + margin2.right)
-  .attr('height', height2 + margin2.top + margin2.bottom)
-  .append('g')
-  .attr('transform', 'translate(' + margin2.left + ',' + margin2.top + ')')
+const width = +svg2.attr('width')
+const height = +svg2.attr('height')
 
-//Read the data
-d3.csv(
-  '/data/output_per_month.csv',
+//GRAPH 1 - Make one rectangle for each row and append rectangles to our svg element
+const render = data => {
+  //create value accessors
+  const xValue = d => d.Output
+  const yValue = d => d.Month
+  const margin = {top: 50, right: 50, bottom: 20, left: 200}
+  const innerWidth = width - margin.left
+  const innerHeight = height - margin.top - margin.bottom
 
-  // When reading the csv, I must format variables:
-  function(d) {
-    return {date: d.date, value: d.value}
-  },
+  const xScale = scaleLinear() //creates an instance of the d3 linear scale
+    .domain([0, max(data, xValue)])
+    .range([0, innerWidth])
+  // console.log(xScale.range())
 
-  // Now I can use this dataset:
-  function(data) {
-    // Add X axis --> it is a date format
-    const x = d3
-      .scaleTime()
-      .domain(
-        d3.extent(data, function(d) {
-          return d.Month
-        })
-      )
-      .range([0, width2])
-    svg2
-      .append('g')
-      .attr('transform', 'translate(0,' + height2 + ')')
-      .call(d3.axisBottom(x))
+  //give name to x axis
+  const xAxis = axisBottom(xScale)
+  .tickSize(-innerHeight)
 
-    // Add Y axis
-    const y = d3
-      .scaleLinear()
-      .domain([
-        0,
-        d3.max(data, function(d) {
-          return +d.Output
-        })
-      ])
-      .range([height2, 0])
-    svg2.append('g').call(d3.axisLeft(y))
+  const yScale = scaleBand()
+    .domain(data.map(yValue))
+    .range([0, innerHeight])
+    .padding(0.3)
+  // console.log(yScale.domain())
 
-    // Add the area
-    svg2
-      .append('path')
-      .datum(data)
-      .attr('fill', '#4682b4')
-      .attr('stroke', '#FFFFFF')
-      .attr('stroke-width', 1.5)
-      .attr(
-        'd',
-        d3
-          .area()
-          .x(function(d) {
-            return x(d.Month)
-          })
-          .y0(y(0))
-          .y1(function(d) {
-            return y(d.Output)
-          })
-      )
-  }
-)
+  //give name to y axis
+  const yAxis = axisLeft(yScale)
+
+  //add margin (left, right, top and/or bottom)
+  const g = svg1
+    .append('g')
+    .attr('transform', `translate(${margin.left}, ${margin.right})`)
+
+  g.append('g').call(yAxis) // append a new group element and put the y axis
+  g
+    .append('g')
+    .call(xAxis) // append a new group element and put the x axis
+    .attr('transform', `translate(0, ${innerHeight})`)
+
+  g
+    .selectAll('rect')
+    .data(data) // then make a d3 data join
+    .enter()
+    .append('rect')
+    .attr('y', d => yScale(yValue(d)))
+    .attr('width', d => xScale(xValue(d)))
+    .attr('height', yScale.bandwidth())
+
+}
+
+//Represent a data table in Javascript - GRAPH 1
+csv('/data/output_per_month.csv').then(data => {
+  data.forEach(d => {
+    d.Output = +d.Output
+  })
+  //Create rectangles for each row
+  render(data)
+})
+

@@ -6,20 +6,20 @@ import {
   scaleBand,
   axisLeft,
   axisBottom
-} from 'd3'
+} from "d3" 
 
+//First graph
 const svg1 = select('svg')
-
 const width = +svg1.attr('width')
 const height = +svg1.attr('height')
 
-//Make one rectangle for each row and append rectangles to our svg element
+//GRAPH 1 - Make one rectangle for each row and append rectangles to our svg element
 const render = data => {
   //create value accessors
   const xValue = d => d.Output
   const yValue = d => d.Instructor
-  const margin = {top: 5, right: 20, bottom: 50, left: 200}
-  const innerWidth = width - margin.left - margin.right
+  const margin = {top: 5, right: 20, bottom: 55, left: 200}
+  const innerWidth = width - margin.left
   const innerHeight = height - margin.top - margin.bottom
 
   const xScale = scaleLinear() //creates an instance of the d3 linear scale
@@ -29,6 +29,8 @@ const render = data => {
 
   //give name to x axis
   const xAxis = axisBottom(xScale)
+  .tickSize(-innerHeight)
+
   const yScale = scaleBand()
     .domain(data.map(yValue))
     .range([0, innerHeight])
@@ -57,9 +59,10 @@ const render = data => {
     .attr('y', d => yScale(yValue(d)))
     .attr('width', d => xScale(xValue(d)))
     .attr('height', yScale.bandwidth())
+
 }
 
-//Represent a data table in Javascript
+//Represent a data table in Javascript - GRAPH 1
 csv('/data/output_instructor.csv').then(data => {
   data.forEach(d => {
     d.Output = +d.Output
@@ -67,3 +70,5 @@ csv('/data/output_instructor.csv').then(data => {
   //Create rectangles for each row
   render(data)
 })
+
+
