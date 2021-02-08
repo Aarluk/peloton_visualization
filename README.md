@@ -28,7 +28,7 @@ Recommended by my bootcamp peer Jasmine: https://www.d3-graph-gallery.com/index.
 
 WHAT SHE WANTS TO SEE:
 
-* [ X ] With which professor do I have the best output per minute of work and which type of class
+* [ ] With which professor do I have the best output per minute of work and which type of class
 
 * [ ] What is my aggregate output by month
 
@@ -39,3 +39,7 @@ WHAT SHE WANTS TO SEE:
 * [ ] Which day of the week do I workout the hardest on average
 
 * [ ] How many calories per month am I burning?
+
+
+--------------
+For color guidelines, we can check: https://sunlightfoundation.com/2014/03/12/datavizguide/
