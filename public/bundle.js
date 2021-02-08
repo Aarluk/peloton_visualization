@@ -96,55 +96,48 @@
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var d3__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! d3 */ "./node_modules/d3/index.js");
+ //First graph
 
-var svg1 = Object(d3__WEBPACK_IMPORTED_MODULE_0__["select"])('svg');
-var width = +svg1.attr('width');
-var height = +svg1.attr('height'); //Make one rectangle for each row and append rectangles to our svg element
+const svg1 = Object(d3__WEBPACK_IMPORTED_MODULE_0__["select"])('svg');
+const width = +svg1.attr('width');
+const height = +svg1.attr('height'); //GRAPH 1 - Make one rectangle for each row and append rectangles to our svg element
 
-var render = function render(data) {
+const render = data => {
   //create value accessors
-  var xValue = function xValue(d) {
-    return d.Output;
-  };
+  const xValue = d => d.Output;
 
-  var yValue = function yValue(d) {
-    return d.Instructor;
-  };
+  const yValue = d => d.Instructor;
 
-  var margin = {
+  const margin = {
     top: 5,
     right: 20,
-    bottom: 50,
+    bottom: 55,
     left: 200
   };
-  var innerWidth = width - margin.left - margin.right;
-  var innerHeight = height - margin.top - margin.bottom;
-  var xScale = Object(d3__WEBPACK_IMPORTED_MODULE_0__["scaleLinear"])() //creates an instance of the d3 linear scale
+  const innerWidth = width - margin.left;
+  const innerHeight = height - margin.top - margin.bottom;
+  const xScale = Object(d3__WEBPACK_IMPORTED_MODULE_0__["scaleLinear"])() //creates an instance of the d3 linear scale
   .domain([0, Object(d3__WEBPACK_IMPORTED_MODULE_0__["max"])(data, xValue)]).range([0, innerWidth]); // console.log(xScale.range())
   //give name to x axis
 
-  var xAxis = Object(d3__WEBPACK_IMPORTED_MODULE_0__["axisBottom"])(xScale);
-  var yScale = Object(d3__WEBPACK_IMPORTED_MODULE_0__["scaleBand"])().domain(data.map(yValue)).range([0, innerHeight]).padding(0.3); // console.log(yScale.domain())
+  const xAxis = Object(d3__WEBPACK_IMPORTED_MODULE_0__["axisBottom"])(xScale).tickSize(-innerHeight);
+  const yScale = Object(d3__WEBPACK_IMPORTED_MODULE_0__["scaleBand"])().domain(data.map(yValue)).range([0, innerHeight]).padding(0.3); // console.log(yScale.domain())
   //give name to y axis
 
-  var yAxis = Object(d3__WEBPACK_IMPORTED_MODULE_0__["axisLeft"])(yScale); //add margin (left, right, top and/or bottom)
+  const yAxis = Object(d3__WEBPACK_IMPORTED_MODULE_0__["axisLeft"])(yScale); //add margin (left, right, top and/or bottom)
 
-  var g = svg1.append('g').attr('transform', "translate(".concat(margin.left, ", ").concat(margin.right, ")"));
+  const g = svg1.append('g').attr('transform', `translate(${margin.left}, ${margin.right})`);
   g.append('g').call(yAxis); // append a new group element and put the y axis
 
   g.append('g').call(xAxis) // append a new group element and put the x axis
-  .attr('transform', "translate(0, ".concat(innerHeight, ")"));
+  .attr('transform', `translate(0, ${innerHeight})`);
   g.selectAll('rect').data(data) // then make a d3 data join
-  .enter().append('rect').attr('y', function (d) {
-    return yScale(yValue(d));
-  }).attr('width', function (d) {
-    return xScale(xValue(d));
-  }).attr('height', yScale.bandwidth());
-}; //Represent a data table in Javascript
+  .enter().append('rect').attr('y', d => yScale(yValue(d))).attr('width', d => xScale(xValue(d))).attr('height', yScale.bandwidth());
+}; //Represent a data table in Javascript - GRAPH 1
 
 
-Object(d3__WEBPACK_IMPORTED_MODULE_0__["csv"])('/data/output_instructor.csv').then(function (data) {
-  data.forEach(function (d) {
+Object(d3__WEBPACK_IMPORTED_MODULE_0__["csv"])('/data/output_instructor.csv').then(data => {
+  data.forEach(d => {
     d.Output = +d.Output;
   }); //Create rectangles for each row
 

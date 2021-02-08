@@ -41,7 +41,7 @@ body {
 
 /* FIRST GRAPH */
 #basic_barchart {
-  color: rgb(194, 193, 193);
+  color: #c0c0bb;
   width: 960px;
   margin-top: 10px;
 }
@@ -59,14 +59,13 @@ text {
   margin-left: 30%;
 }
 
-/* SECOND GRAPH */
-#output_per_month {
-  color: rgb(194, 193, 193);
-  width: 960px;
-  margin-top: 10px;
+.tick line {
+  stroke: #4f4f4f;
 }
 
-#graph2-title {
-  color: rgb(251, 51, 71);
-  margin-left: 30%;
+text {
+  fill: #c0c0bb;
 }
+
+/* SECOND GRAPH */
+
