@@ -28,7 +28,7 @@ Recommended by my bootcamp peer Jasmine: https://www.d3-graph-gallery.com/index.
 
 WHAT SHE WANTS TO SEE:
 
-* [ ] With which professor do I have the best output per minute of work and which type of class
+* [X] With which professor do I have the best output per minute of work and which type of class
 
 * [ ] What is my aggregate output by month
 
